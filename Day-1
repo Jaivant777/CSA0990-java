@@ -1,0 +1,191 @@
+1. Reverse a word using a loop
+
+import java.util.Scanner;
+
+public class ReverseString {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word: ");
+        String word = scanner.next();
+        String reversedWord = "";
+        for (int i = word.length() - 1; i >= 0; i--) {
+            reversedWord += word.charAt(i);
+        }
+        System.out.println("Reverse String: " + reversedWord);
+    }
+}
+
+2. Convert a given string to integer
+
+import java.util.Scanner;
+
+public class StringToInteger {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = scanner.next();
+        int num = 0;
+        for (int i = 0; i < s.length(); i++) {
+            num = num * 10 + (s.charAt(i) - '0');
+        }
+        System.out.println("Output String: " + num);
+    }
+}
+
+3. Check if the entered username is valid
+
+import java.util.Scanner;
+
+public class ValidUsername {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter username: ");
+        String username = scanner.next();
+        String[] validUsernames = {"user1", "user2", "user3"};
+
+        boolean isValid = false;
+        for (String validUsername : validUsernames) {
+            if (validUsername.equals(username)) {
+                isValid = true;
+                break;
+            }
+        }
+
+        if (isValid) {
+            System.out.println("Valid username");
+        } else {
+            System.out.println("Invalid username");
+        }
+    }
+}
+
+4. Sort a list of names in alphabetical order
+
+import java.util.Scanner;
+
+public class SortNames {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] names = {"Banana", "Carrot", "Radish", "Apple", "Jack"};
+
+        System.out.print("Order (A/D): ");
+        char order = scanner.next().charAt(0);
+
+        for (int i = 0; i < names.length - 1; i++) {
+            for (int j = i + 1; j < names.length; j++) {
+                if ((order == 'A' && names[i].compareTo(names[j]) > 0) || 
+                    (order == 'D' && names[i].compareTo(names[j]) < 0)) {
+                    String temp = names[i];
+                    names[i] = names[j];
+                    names[j] = temp;
+                }
+            }
+        }
+
+        for (String name : names) {
+            System.out.println(name);
+        }
+    }
+}
+
+5. Print special characters separately and count them
+
+import java.util.Scanner;
+
+public class SpecialCharacters {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = scanner.nextLine();
+        
+        String specialChars = "";
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!Character.isLetterOrDigit(ch) && !Character.isWhitespace(ch)) {
+                specialChars += ch + " ";
+                count++;
+            }
+        }
+
+        System.out.println("Special characters: " + specialChars.trim());
+        System.out.println("Number of special characters: " + count);
+    }
+}
+
+6. Print the number of vowels in a given statement
+
+import java.util.Scanner;
+
+public class CountVowels {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a statement: ");
+        String s = scanner.nextLine();
+        
+        String vowels = "aeiouAEIOU";
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (vowels.indexOf(s.charAt(i)) != -1) {
+                count++;
+            }
+        }
+
+        System.out.println("Number of vowels = " + count);
+    }
+}
+
+7. Print consonants and vowels separately in a given word
+
+import java.util.Scanner;
+
+public class SeparateConsonantsVowels {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word: ");
+        String word = scanner.next();
+        
+        String vowels = "aeiouAEIOU";
+        String consonants = "";
+        String vowelsStr = "";
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (vowels.indexOf(ch) != -1) {
+                vowelsStr += ch + " ";
+            } else {
+                consonants += ch + " ";
+            }
+        }
+
+        System.out.println("Consonants: " + consonants.trim());
+        System.out.println("Vowels: " + vowelsStr.trim());
+    }
+}
+
+8. Find whether a given character is present in a string and its index
+
+import java.util.Scanner;
+
+public class FindCharacter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the string: ");
+        String s = scanner.nextLine();
+        System.out.print("Enter the character to be searched: ");
+        char charToFind = scanner.next().charAt(0);
+        
+        int index = -1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == charToFind) {
+                index = i;
+                break;
+            }
+        }
+
+        if (index != -1) {
+            System.out.println(charToFind + " is found in string at index: " + index);
+        } else {
+            System.out.println(charToFind + " is not found in the string");
+        }
+    }
+}
