@@ -1,0 +1,227 @@
+9. Arrange letters of the word alphabetically in reverse order
+
+import java.util.Scanner;
+
+public class ReverseAlphabeticalOrder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the word: ");
+        String word = scanner.next();
+        
+        char[] letters = word.toCharArray();
+        for (int i = 0; i < letters.length - 1; i++) {
+            for (int j = i + 1; j < letters.length; j++) {
+                if (letters[i] < letters[j]) {
+                    char temp = letters[i];
+                    letters[i] = letters[j];
+                    letters[j] = temp;
+                }
+            }
+        }
+
+        String result = "";
+        for (char letter : letters) {
+            result += letter + " ";
+        }
+
+        System.out.println("Alphabetical Order: " + result.trim());
+    }
+}
+
+10. Remove vowels from a string
+
+import java.util.Scanner;
+
+public class RemoveVowels {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String s = scanner.nextLine();
+        
+        String vowels = "aeiouAEIOU";
+        String result = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (vowels.indexOf(s.charAt(i)) == -1) {
+                result += s.charAt(i);
+            }
+        }
+
+        System.out.println("The string without vowels is: " + result);
+    }
+}
+
+11. Matrix multiplication
+
+import java.util.Scanner;
+
+public class MatrixMultiplication {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] mat1 = {{1, 2}, {5, 3}};
+        int[][] mat2 = {{2, 3}, {4, 1}};
+        
+        int[][] result = new int[2][2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 2; k++) {
+                    result[i][j] += mat1[i][k] * mat2[k][j];
+                }
+            }
+        }
+
+        System.out.println("Matrix Multiplication Result:");
+        for (int[] row : result) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+12. Matrix addition
+
+import java.util.Scanner;
+
+public class MatrixAddition {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] mat1 = {{1, 2}, {5, 3}};
+        int[][] mat2 = {{2, 3}, {4, 1}};
+        
+        int[][] result = new int[2][2];
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                result[i][j] = mat1[i][j] + mat2[i][j];
+            }
+        }
+
+        System.out.println("Matrix Addition Result:");
+        for (int[] row : result) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+}
+
+13. Merge two sorted arrays
+
+import java.util.Scanner;
+
+public class MergeSortedArrays {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 3, 4, 5};
+        int[] arr2 = {2, 4, 6, 8};
+        
+        int[] arr3 = new int[arr1.length + arr2.length];
+        int i = 0, j = 0, k = 0;
+        
+        while (i < arr1.length && j < arr2.length) {
+            if (arr1[i] < arr2[j]) {
+                arr3[k++] = arr1[i++];
+            } else {
+                arr3[k++] = arr2[j++];
+            }
+        }
+        
+        while (i < arr1.length) {
+            arr3[k++] = arr1[i++];
+        }
+        
+        while (j < arr2.length) {
+            arr3[k++] = arr2[j++];
+        }
+        
+        System.out.print("Merged Array: ");
+        for (int val : arr3) {
+            System.out.print(val + " ");
+        }
+    }
+}
+
+14. Find the Mean, Median, Mode of the array of numbers
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class MeanMedianMode {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] arr = {16, 18, 27, 16, 23, 21, 19};
+        
+        System.out.println("Mean = " + mean(arr));
+        System.out.println("Median = " + median(arr));
+        System.out.println("Mode = " + mode(arr));
+    }
+
+    public static double mean(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        return (double) sum / arr.length;
+    }
+
+    public static double median(int[] arr) {
+        Arrays.sort(arr);
+        if (arr.length % 2 == 0) {
+            return (arr[arr.length / 2 - 1] + arr[arr.length / 2]) / 2.0;
+        } else {
+            return arr[arr.length / 2];
+        }
+    }
+
+    public static int mode(int[] arr) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : arr) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+        int mode = arr[0];
+        int maxCount = 0;
+        for (Map.Entry<Integer, Integer> entry : frequencyMap.entrySet()) {
+            if (entry.getValue() > maxCount) {
+                maxCount = entry.getValue();
+                mode = entry.getKey();
+            }
+        }
+        return mode;
+    }
+}
+
+15. Find the number of composite numbers in an array
+
+import java.util.Scanner;
+
+public class CompositeNumbers {
+    public static void main(String[] args) {
+        int[] arr = {16, 18, 27, 16, 23, 21, 19};
+        
+        System.out.println("Number of Composite Numbers = " + countComposites(arr));
+    }
+
+    public static boolean isComposite(int num) {
+        if (num < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int countComposites(int[] arr) {
+        int count = 0;
+        for (int num : arr) {
+            if (isComposite(num)) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
