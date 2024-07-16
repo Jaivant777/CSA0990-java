@@ -1,0 +1,174 @@
+36. Program to print all composite numbers between a and b:
+
+import java.util.Scanner;
+
+public class CompositeNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the start number (A): ");
+        int A = scanner.nextInt();
+        System.out.print("Enter the end number (B): ");
+        int B = scanner.nextInt();
+
+        for (int i = Math.min(A, B); i <= Math.max(A, B); i++) {
+            if (i > 1 && !isPrime(i)) {
+                System.out.print(i + " ");
+            }
+        }
+    }
+
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+37. Program to find the factorial of n:
+
+import java.util.Scanner;
+
+public class Factorial {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number (N): ");
+        int N = scanner.nextInt();
+
+        if (N < 0) {
+            System.out.println("Factorial not defined for negative numbers");
+        } else {
+            int factorial = 1;
+            for (int i = 1; i <= N; i++) {
+                factorial *= i;
+            }
+            System.out.println(N + " Factorial = " + factorial);
+        }
+    }
+}
+
+38. Program to find whether the year of the given date is a leap year or not:
+
+
+import java.util.Scanner;
+
+public class LeapYear {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter Date (dd/mm/yyyy): ");
+        String date = scanner.nextLine();
+
+        String[] parts = date.split("/");
+        int year = Integer.parseInt(parts[2]);
+
+        if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            System.out.println("Given year is a Leap Year");
+        } else {
+            System.out.println("Given year is a Non Leap Year");
+        }
+    }
+}
+
+39. Program to find the number of factors for a given number:
+
+
+import java.util.Scanner;
+
+public class NumberOfFactors {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        if (number <= 0) {
+            System.out.println("Number of factors not defined for non-positive numbers");
+            return;
+        }
+
+        int count = 0;
+        for (int i = 1; i <= number; i++) {
+            if (number % i == 0) {
+                count++;
+            }
+        }
+        System.out.println("Number of factors: " + count);
+    }
+}
+
+40. Program to check if a given number is a perfect number:
+
+
+import java.util.Scanner;
+
+public class PerfectNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        if (number <= 0) {
+            System.out.println("Number is not a perfect number");
+            return;
+        }
+
+        int sum = 0;
+        for (int i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                sum += i;
+            }
+        }
+
+        if (sum == number) {
+            System.out.println("It's a Perfect Number");
+        } else {
+            System.out.println("It's not a Perfect Number");
+        }
+    }
+}
+41. Program to find the square and cube of a given decimal number:
+
+import java.util.Scanner;
+
+public class SquareAndCube {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        double number = scanner.nextDouble();
+
+        double square = number * number;
+        double cube = number * number * number;
+
+        System.out.println("Square Number: " + square);
+        System.out.println("Cube Number: " + cube);
+    }
+}
+
+42. Program to find the nth odd number after n odd numbers:
+
+import java.util.Scanner;
+
+public class NthOddNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the N value: ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Invalid input, N should be positive.");
+            return;
+        }
+
+        int count = 0;
+        for (int i = 1; count < n; i += 2) {
+            if (count < n) {
+                System.out.print(i + " ");
+                count++;
+            }
+        }
+    }
+}
