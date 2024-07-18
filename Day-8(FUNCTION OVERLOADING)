@@ -1,0 +1,116 @@
+1. Overloading Methods with Different Numbers of Parameters
+
+public class OverloadDifferentNumbers {
+
+    public void print(int a) {
+        System.out.println("Integer: " + a);
+    }
+
+    public void print(int a, int b) {
+        System.out.println("Integers: " + a + ", " + b);
+    }
+
+    public void print(int a, int b, int c) {
+        System.out.println("Integers: " + a + ", " + b + ", " + c);
+    }
+
+    public static void main(String[] args) {
+        OverloadDifferentNumbers obj = new OverloadDifferentNumbers();
+        obj.print(10);
+        obj.print(20, 30);
+        obj.print(40, 50, 60);
+    }
+}
+2. Overloading Methods with Different Parameter Types
+
+public class OverloadDifferentTypes {
+
+    public void show(String a) {
+        System.out.println("String: " + a);
+    }
+
+    public void show(int a) {
+        System.out.println("Integer: " + a);
+    }
+
+    public void show(double a) {
+        System.out.println("Double: " + a);
+    }
+
+    public static void main(String[] args) {
+        OverloadDifferentTypes obj = new OverloadDifferentTypes();
+        obj.show("Hello");
+        obj.show(100);
+        obj.show(99.99);
+    }
+}
+
+3. Overloading Methods with Different Order of Parameters
+
+public class OverloadDifferentOrder {
+
+    public void display(int a, double b) {
+        System.out.println("int and double: " + a + ", " + b);
+    }
+
+    public void display(double a, int b) {
+        System.out.println("double and int: " + a + ", " + b);
+    }
+
+    public static void main(String[] args) {
+        OverloadDifferentOrder obj = new OverloadDifferentOrder();
+        obj.display(10, 20.5);
+        obj.display(30.5, 40);
+    }
+}
+4. Overloading Methods with Varied Data Types
+
+public class OverloadVariedTypes {
+
+    public void compute(int a, double b) {
+        System.out.println("int and double: " + (a + b));
+    }
+
+    public void compute(double a, int b) {
+        System.out.println("double and int: " + (a + b));
+    }
+
+    public void compute(int a, int b) {
+        System.out.println("int and int: " + (a + b));
+    }
+
+    public void compute(double a, double b) {
+        System.out.println("double and double: " + (a + b));
+    }
+
+    public static void main(String[] args) {
+        OverloadVariedTypes obj = new OverloadVariedTypes();
+        obj.compute(10, 20.5);
+        obj.compute(30.5, 40);
+        obj.compute(50, 60);
+        obj.compute(70.5, 80.5);
+    }
+}
+
+5. Overloading Constructors
+
+public class OverloadConstructors {
+
+    public OverloadConstructors() {
+        System.out.println("Default constructor");
+    }
+
+    public OverloadConstructors(int a) {
+        System.out.println("Constructor with one parameter: " + a);
+    }
+
+    public OverloadConstructors(int a, int b) {
+        System.out.println("Constructor with two parameters: " + a + ", " + b);
+    }
+
+    public static void main(String[] args) {
+        OverloadConstructors obj1 = new OverloadConstructors();
+        OverloadConstructors obj2 = new OverloadConstructors(100);
+        OverloadConstructors obj3 = new OverloadConstructors(200, 300);
+    }
+}
