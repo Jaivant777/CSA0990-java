@@ -1,0 +1,272 @@
+43. Program to check if a number is an Armstrong number:
+
+import java.util.Scanner;
+
+public class ArmstrongNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        int originalNumber = number;
+        int result = 0;
+        int n = 0;
+
+        while (originalNumber != 0) {
+            originalNumber /= 10;
+            ++n;
+        }
+
+        originalNumber = number;
+
+        while (originalNumber != 0) {
+            int remainder = originalNumber % 10;
+            result += Math.pow(remainder, n);
+            originalNumber /= 10;
+        }
+
+        if (result == number) {
+            System.out.println("Given number is Armstrong number");
+        } else {
+            System.out.println("Given number is not Armstrong number");
+        }
+    }
+}
+44. Program to find the sum of digits of an N-digit number (sum should be single digit):
+
+import java.util.Scanner;
+
+public class SumOfDigits {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of digits (N): ");
+        int N = scanner.nextInt();
+        System.out.print("Enter the " + N + " digit number: ");
+        int number = scanner.nextInt();
+        int sum = 0;
+
+        while (number != 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+
+        while (sum >= 10) {
+            int temp = sum;
+            sum = 0;
+            while (temp != 0) {
+                sum += temp % 10;
+                temp /= 10;
+            }
+        }
+
+        System.out.println("Single digit sum: " + sum);
+    }
+}
+45. Program to find the square root of a perfect square number:
+
+import java.util.Scanner;
+
+public class SquareRoot {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        if (number < 0) {
+            System.out.println("Square root not defined for negative numbers");
+            return;
+        }
+
+        double sqrt = Math.sqrt(number);
+        if (sqrt == (int) sqrt) {
+            System.out.println("Square Root: " + (int)sqrt + ", -" + (int)sqrt);
+        } else {
+            System.out.println("Number is not a perfect square");
+        }
+    }
+}
+46. Program to check if a number is a power of three:
+
+
+import java.util.Scanner;
+
+public class PowerOfThree {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+
+        if (isPowerOfThree(number)) {
+            System.out.println("True");
+        } else {
+            System.out.println("False");
+        }
+    }
+
+    public static boolean isPowerOfThree(int number) {
+        if (number < 1) {
+            return false;
+        }
+
+        while (number % 3 == 0) {
+            number /= 3;
+        }
+        return number == 1;
+    }
+}
+47. Program to find the most frequent word that is not banned:
+
+import java.util.*;
+
+public class MostFrequentWord {
+    public static void main(String[] args) {
+        String paragraph = "Ram hit a ball, the hit ball flew far after it was hit";
+        String[] banned = {"hit"};
+        
+        System.out.println(mostCommonWord(paragraph, banned));
+    }
+
+    public static String mostCommonWord(String paragraph, String[] banned) {
+        Set<String> bannedSet = new HashSet<>(Arrays.asList(banned));
+        Map<String, Integer> wordCount = new HashMap<>();
+
+        String[] words = paragraph.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+        for (String word : words) {
+            if (!bannedSet.contains(word)) {
+                wordCount.put(word, wordCount.getOrDefault(word, 0) + 1);
+            }
+        }
+
+        return Collections.max(wordCount.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+}
+48. Program to duplicate each occurrence of zero in an array:
+
+import java.util.Arrays;
+
+public class DuplicateZeros {
+    public static void main(String[] args) {
+        int[] arr = {1, 0, 2, 3, 0, 4, 5, 0};
+        duplicateZeros(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void duplicateZeros(int[] arr) {
+        int possibleDups = 0;
+        int length = arr.length - 1;
+
+        for (int left = 0; left <= length - possibleDups; left++) {
+            if (arr[left] == 0) {
+                if (left == length - possibleDups) {
+                    arr[length] = 0;
+                    length -= 1;
+                    break;
+                }
+                possibleDups++;
+            }
+        }
+
+        int last = length - possibleDups;
+
+        for (int i = last; i >= 0; i--) {
+            if (arr[i] == 0) {
+                arr[i + possibleDups] = 0;
+                possibleDups--;
+                arr[i + possibleDups] = 0;
+            } else {
+                arr[i + possibleDups] = arr[i];
+            }
+        }
+    }
+}
+49. Program to find the missing number in an array:
+
+import java.util.*;
+
+public class MissingNumber {
+    public static void main(String[] args) {
+        int[] nums = {3, 0, 1};
+        System.out.println(missingNumber(nums));
+    }
+
+    public static int missingNumber(int[] nums) {
+        int n = nums.length;
+        int sum = n * (n + 1) / 2;
+        for (int num : nums) {
+            sum -= num;
+        }
+        return sum;
+    }
+}
+50. Program to find the subarray with the largest sum:
+
+import java.util.*;
+
+public class MaxSubArray {
+    public static void main(String[] args) {
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        System.out.println(maxSubArray(nums));
+    }
+
+    public static int maxSubArray(int[] nums) {
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        return maxSum;
+    }
+}
+
+51. Program to print the multiplication table of a number m up to n:
+
+import java.util.Scanner;
+
+public class MultiplicationTable {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number (M): ");
+        int M = scanner.nextInt();
+        System.out.print("Enter the range (N): ");
+        int N = scanner.nextInt();
+
+        for (int i = 1; i <= Math.abs(N); i++) {
+            System.out.println(i + " x " + M + " = " + (i * M));
+        }
+    }
+}
+52. Java program to implement multiple threads and apply join method:
+
+class MyThread extends Thread {
+    private String name;
+
+    MyThread(String name) {
+        this.name = name;
+    }
+
+    public void run() {
+        try {
+            Thread.sleep(500);
+            System.out.println(name + " is running.");
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+}
+
+public class MultiThreadExample {
+    public static void main(String[] args) {
+        MyThread t1 = new MyThread("Thread 1");
+        MyThread t2 = new MyThread("Thread 2");
+
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+
+        t2.start();
+    }
+}
