@@ -1,0 +1,92 @@
+1.DaysConverter:
+import java.util.Scanner;
+
+public class DaysConverter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of days: ");
+        int totalDays = scanner.nextInt();
+        
+        convertDays(totalDays);
+
+     
+        int[] testCases = {756};
+        for (int testCase : testCases) {
+            System.out.println("Input days: " + testCase);
+            convertDays(testCase);
+        }
+    }
+
+    private static void convertDays(int totalDays) {
+        if (totalDays < 0) {
+            System.out.println("Please enter a non-negative number of days.");
+            return;
+        }
+        int years = totalDays / 365;
+        int weeks = (totalDays % 365) / 7;
+        int days = (totalDays % 365) % 7;
+        
+        System.out.println("No. of years: " + years);
+        System.out.println("No. of weeks: " + weeks);
+        System.out.println("No. of days: " + days);
+    }
+}
+2.CollegeUsers:
+import java.util.Scanner;
+
+public class CollegeUsers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+
+        System.out.print("Total Users: ");
+        int totalUsers = scanner.nextInt();
+        System.out.print("Staff Users: ");
+        int staffUsers = scanner.nextInt();
+        
+      
+        int nonTeachingStaffUsers = staffUsers / 3;
+
+        int studentUsers = totalUsers - (staffUsers + nonTeachingStaffUsers);
+      
+        System.out.println("Student Users: " + studentUsers);
+    }
+}
+3.PerfectSquares:
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class PerfectSquaresInRange {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter lower range: ");
+        int lower = scanner.nextInt();
+        System.out.print("Enter upper range: ");
+        int upper = scanner.nextInt();
+
+        List<Integer> perfectSquares = getPerfectSquares(lower, upper);
+        System.out.println(perfectSquares);
+    }
+
+    private static List<Integer> getPerfectSquares(int lower, int upper) {
+        List<Integer> result = new ArrayList<>();
+        for (int i = 1; i * i <= upper; i++) {
+            int square = i * i;
+            if (square >= lower && sumOfDigits(square) < 10) {
+                result.add(square);
+            }
+        }
+        return result;
+    }
+
+    private static int sumOfDigits(int num) {
+        int sum = 0;
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+}
