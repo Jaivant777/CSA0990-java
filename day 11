@@ -1,0 +1,341 @@
+8. Bank Account Management:
+
+import java.util.Scanner;
+
+class BankAccount {
+    private String depositorName;
+    private String accountNumber;
+    private String accountType;
+    private double balanceAmount;
+
+    public BankAccount() {
+        this.balanceAmount = 500.00;
+    }
+
+    public void readAccountDetails() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter Account Number: ");
+        this.accountNumber = scanner.nextLine();
+
+        System.out.print("Enter Depositor Name: ");
+        this.depositorName = scanner.nextLine();
+
+        System.out.print("Enter Account Type (Savings/Current): ");
+        this.accountType = scanner.nextLine();
+    }
+
+    public void depositAmount(double amount) {
+        if (amount > 0) {
+            this.balanceAmount += amount;
+            System.out.println("Amount Deposited Successfully.");
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    public void displayBalance() {
+        System.out.println("Balance Amount: Rs. " + this.balanceAmount);
+    }
+
+    public static void main(String[] args) {
+        BankAccount account = new BankAccount();
+        account.readAccountDetails();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter amount to deposit: ");
+        double amount = scanner.nextDouble();
+
+        account.depositAmount(amount);
+        account.displayBalance();
+    }
+}
+9. Reverse and Add Until Palindrome
+
+import java.util.Scanner;
+
+public class ReverseAndAdd {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number: ");
+        int number = scanner.nextInt();
+        
+        while (!isPalindrome(number)) {
+            int reverseNumber = reverse(number);
+            int sum = number + reverseNumber;
+            System.out.println(number + " + " + reverseNumber + " = " + sum);
+            number = sum;
+        }
+        
+        System.out.println("Palindrome: " + number);
+    }
+
+    private static int reverse(int number) {
+        int reverse = 0;
+        while (number != 0) {
+            reverse = reverse * 10 + number % 10;
+            number /= 10;
+        }
+        return reverse;
+    }
+
+    private static boolean isPalindrome(int number) {
+        return number == reverse(number);
+    }
+}
+10.Customer Class with Synchronized Methods for Deposit and Withdraw
+
+class Customer {
+    private int accountNo;
+    private String accName;
+    private double balance;
+
+    public Customer(int accountNo, String accName, double balance) {
+        this.accountNo = accountNo;
+        this.accName = accName;
+        this.balance = balance;
+    }
+
+    public synchronized void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount + ", New Balance: " + balance);
+        notify();
+    }
+
+    public synchronized void withdraw(double amount) {
+        while (balance < amount) {
+            System.out.println("Insufficient balance for withdrawal of " + amount + ". Waiting for deposit...");
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        balance -= amount;
+        System.out.println("Withdraw operation success, Withdrawn: " + amount + ", Remaining Balance: " + balance);
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+public class BankOperations {
+    public static void main(String[] args) {
+        Customer customer = new Customer(12345, "John Doe", 10000);
+
+        Thread withdrawThread = new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter amount to withdraw: ");
+            double withdrawAmount = scanner.nextDouble();
+            customer.withdraw(withdrawAmount);
+        });
+
+        Thread depositThread = new Thread(() -> {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter amount to deposit: ");
+            double depositAmount = scanner.nextDouble();
+            customer.deposit(depositAmount);
+        });
+
+        withdrawThread.start();
+        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        depositThread.start();
+    }
+}
+11.FizzBuzz
+
+import java.util.Scanner;
+
+public class FizzBuzz {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number n: ");
+        int n = scanner.nextInt();
+
+        String[] result = fizzBuzz(n);
+
+        for (String s : result) {
+            System.out.println(s);
+        }
+    }
+
+    public static String[] fizzBuzz(int n) {
+        String[] answer = new String[n];
+
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
+                answer[i - 1] = "FizzBuzz";
+            } else if (i % 3 == 0) {
+                answer[i - 1] = "Fizz";
+            } else if (i % 5 == 0) {
+                answer[i - 1] = "Buzz";
+            } else {
+                answer[i - 1] = Integer.toString(i);
+            }
+        }
+
+        return answer;
+    }
+}
+12. Find Common Elements in Two Arrays
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+
+public class CommonElements {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the size of the first array: ");
+        int size1 = scanner.nextInt();
+        int[] array1 = new int[size1];
+        System.out.println("Enter elements of the first array:");
+        for (int i = 0; i < size1; i++) {
+            array1[i] = scanner.nextInt();
+        }
+
+        System.out.print("Enter the size of the second array: ");
+        int size2 = scanner.nextInt();
+        int[] array2 = new int[size2];
+        System.out.println("Enter elements of the second array:");
+        for (int i = 0; i < size2; i++) {
+            array2[i] = scanner.nextInt();
+        }
+
+        
+        int[] commonElements = findCommonElements(array1, array2);
+
+        
+        System.out.print("Common elements: ");
+        for (int elem : commonElements) {
+            System.out.print(elem + " ");
+        }
+    }
+
+    public static int[] findCommonElements(int[] array1, int[] array2) {
+        Set<Integer> set1 = new HashSet<>();
+        for (int num : array1) {
+            set1.add(num);
+        }
+
+        Set<Integer> commonSet = new HashSet<>();
+        for (int num : array2) {
+            if (set1.contains(num)) {
+                commonSet.add(num);
+            }
+        }
+
+        int[] commonArray = new int[commonSet.size()];
+        int index = 0;
+        for (int num : commonSet) {
+            commonArray[index++] = num;
+        }
+
+        return commonArray;
+    }
+}
+13. Length of the Last Word
+
+import java.util.Scanner;
+
+public class LastWordLength {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the string: ");
+        String s = scanner.nextLine();
+        
+        int length = lengthOfLastWord(s);
+        System.out.println("Length of the last word: " + length);
+    }
+
+    public static int lengthOfLastWord(String s) {
+        s = s.trim(); 
+        int lastSpaceIndex = s.lastIndexOf(' ');
+
+        return s.length() - lastSpaceIndex - 1;
+    }
+}
+14. Roman Numeral to Integer
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class RomanToInteger {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the Roman numeral: ");
+        String s = scanner.nextLine();
+
+        int result = romanToInt(s);
+        System.out.println("Output: " + result);
+    }
+
+    public static int romanToInt(String s) {
+        Map<Character, Integer> romanMap = new HashMap<>();
+        romanMap.put('I', 1);
+        romanMap.put('V', 5);
+        romanMap.put('X', 10);
+        romanMap.put('L', 50);
+        romanMap.put('C', 100);
+        romanMap.put('D', 500);
+        romanMap.put('M', 1000);
+
+        int total = 0;
+        for (int i = 0; i < s.length(); i++) {
+            int current = romanMap.get(s.charAt(i));
+            if (i < s.length() - 1 && current < romanMap.get(s.charAt(i + 1))) {
+                total -= current;
+            } else {
+                total += current;
+            }
+        }
+        return total;
+    }
+}
+15.  Ransom Note Construction
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class RansomNote {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the ransom note: ");
+        String ransomNote = scanner.nextLine();
+        System.out.print("Enter the magazine: ");
+        String magazine = scanner.nextLine();
+        
+        boolean result = canConstruct(ransomNote, magazine);
+        System.out.println("Output: " + result);
+    }
+
+    public static boolean canConstruct(String ransomNote, String magazine) {
+        Map<Character, Integer> charCount = new HashMap<>();
+        
+        
+        for (char c : magazine.toCharArray()) {
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+        }
+
+ 
+        for (char c : ransomNote.toCharArray()) {
+            if (!charCount.containsKey(c) || charCount.get(c) == 0) {
+                return false;
+            }
+            charCount.put(c, charCount.get(c) - 1);
+        }
+        
+        return true;
+    }
+}
