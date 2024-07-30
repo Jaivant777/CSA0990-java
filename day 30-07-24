@@ -1,0 +1,128 @@
+1.
+  public class SumOfNumbers {
+    public static void main(String[] args) {
+        int N = 5;
+        int[] numbers = {1, 2, 3, 4, 5};
+        int sum = 0;
+        
+        try {
+            for (int i = 0; i <= N; i++) {
+                sum += numbers[i];
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException caught: " + e.getMessage());
+        }
+        
+        System.out.println("Sum: " + sum);
+    }
+}
+
+output:
+Sum: 15
+
+2.
+
+  public class PrimeCheck implements Runnable {
+    private int number;
+
+    public PrimeCheck(int number) {
+        this.number = number;
+    }
+
+
+    public void run() {
+        boolean isPrime = true;
+        if (number <= 1) {
+            isPrime = false;
+        } else {
+            for (int i = 2; i <= Math.sqrt(number); i++) {
+                if (number % i == 0) {
+                    isPrime = false;
+                    break;
+                }
+            }
+        }
+        System.out.println(number + " is " + (isPrime ? "prime" : "not prime"));
+    }
+  output:
+  29 is prime
+
+  3.
+
+    public class MultiCatchExample {
+    public static void main(String[] args) {
+        try {
+            int a = 10, b = 0;
+            int result = a / b;
+
+            int[] array = new int[5];
+            int num = array[10];
+
+            String str = null;
+            str.length();
+        } catch (ArithmeticException | ArrayIndexOutOfBoundsException | NullPointerException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}
+
+output:
+  Exception caught: / by zero
+
+  4.
+
+    class Box {
+    double width, height, depth;
+
+    Box() {
+        width = 10;
+        height = 10;
+        depth = 10;
+    }
+
+    double volume() {
+        return width * height * depth;
+    }
+
+    public static void main(String[] args) {
+        Box box = new Box();
+        System.out.println("Volume of the box: " + box.volume());
+    }
+}
+
+  output:
+Volume of the box: 1000.0
+
+5.
+
+  public class Fibonacci implements Runnable {
+    private int count;
+
+    public Fibonacci(int count) {
+        this.count = count;
+    }
+
+    public void run() {
+        int n1 = 0, n2 = 1;
+        System.out.print(n1 + " " + n2);
+        for (int i = 2; i < count; i++) {
+            int n3 = n1 + n2;
+            System.out.print(" " + n3);
+            n1 = n2;
+            n2 = n3;
+        }
+    }
+
+    public static void main(String[] args) {
+        int count = 10;
+        Fibonacci fibonacci = new Fibonacci(count);
+        Thread thread = new Thread(fibonacci);
+        thread.start();
+    }
+}
+
+output:
+  0 1 1 2 3 5 8 13 21 34
+
+
+  
